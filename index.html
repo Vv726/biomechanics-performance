@@ -1,0 +1,547 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>生物力学研究团队</title>
+    <style>
+        /* ===== 全局重置 & 基础 ===== */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'PingFang SC', Roboto, 'Helvetica Neue', sans-serif;
+            background-color: #f4f6f9;
+            color: #1a1a2e;
+            line-height: 1.7;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== 导航栏 ===== */
+        .navbar {
+            background-color: #1a1a2e;
+            color: #fff;
+            padding: 16px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .navbar .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .navbar .logo {
+            font-size: 1.3rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .navbar .logo span {
+            color: #e94560;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 28px;
+            list-style: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a {
+            transition: color 0.2s;
+        }
+
+        .nav-links a:hover {
+            color: #e94560;
+        }
+
+        /* ===== Hero 区域 ===== */
+        .hero {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+            color: #fff;
+            padding: 100px 0 80px;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 700;
+            margin-bottom: 16px;
+            letter-spacing: 1px;
+        }
+
+        .hero h1 span {
+            color: #e94560;
+        }
+
+        .hero .subtitle {
+            font-size: 1.35rem;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 20px;
+        }
+
+        .hero .description {
+            font-size: 1.05rem;
+            opacity: 0.75;
+            max-width: 750px;
+            margin: 0 auto;
+            line-height: 1.8;
+        }
+
+        /* ===== 通用标题 ===== */
+        .section-title {
+            font-size: 2.2rem;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 12px;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #555;
+            font-size: 1.05rem;
+            margin-bottom: 48px;
+        }
+
+        /* ===== 关于我们 ===== */
+        .about {
+            padding: 80px 0 60px;
+            background: #fff;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 48px;
+            align-items: start;
+        }
+
+        .about-text p {
+            margin-bottom: 16px;
+            color: #333;
+            font-size: 1.02rem;
+        }
+
+        .about-text strong {
+            color: #1a1a2e;
+        }
+
+        .mission-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .mission-list li {
+            background: #f4f6f9;
+            padding: 16px 20px;
+            margin-bottom: 12px;
+            border-radius: 8px;
+            border-left: 4px solid #e94560;
+            font-weight: 500;
+        }
+
+        /* ===== 研究方向 ===== */
+        .research {
+            padding: 80px 0 60px;
+            background: #f4f6f9;
+        }
+
+        .research-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 28px;
+        }
+
+        .research-card {
+            background: #fff;
+            padding: 32px 24px;
+            border-radius: 12px;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.06);
+            transition: transform 0.25s, box-shadow 0.25s;
+            text-align: center;
+        }
+
+        .research-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.10);
+        }
+
+        .research-card .icon {
+            font-size: 2.6rem;
+            margin-bottom: 12px;
+        }
+
+        .research-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 8px;
+            color: #1a1a2e;
+        }
+
+        .research-card p {
+            color: #555;
+            font-size: 0.95rem;
+        }
+
+        /* ===== 团队成员 ===== */
+        .team {
+            padding: 80px 0 60px;
+            background: #fff;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 36px;
+        }
+
+        .team-card {
+            text-align: center;
+            background: #fafbfc;
+            padding: 28px 16px 24px;
+            border-radius: 12px;
+            transition: box-shadow 0.25s;
+        }
+
+        .team-card:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.07);
+        }
+
+        .team-card .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #1a1a2e, #0f3460);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.8rem;
+            font-weight: 600;
+            margin: 0 auto 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.10);
+        }
+
+        .team-card .name {
+            font-size: 1.2rem;
+            font-weight: 700;
+        }
+
+        .team-card .title {
+            color: #e94560;
+            font-weight: 500;
+            font-size: 0.95rem;
+            margin: 4px 0 8px;
+        }
+
+        .team-card .bio {
+            color: #555;
+            font-size: 0.92rem;
+            max-width: 260px;
+            margin: 0 auto;
+        }
+
+        /* ===== 研究成果 ===== */
+        .publications {
+            padding: 80px 0 60px;
+            background: #f4f6f9;
+        }
+
+        .pub-list {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px 40px;
+        }
+
+        .pub-item {
+            background: #fff;
+            padding: 18px 22px;
+            border-radius: 8px;
+            border-left: 4px solid #1a1a2e;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+        }
+
+        .pub-item .pub-title {
+            font-weight: 600;
+            color: #1a1a2e;
+        }
+
+        .pub-item .pub-meta {
+            font-size: 0.9rem;
+            color: #777;
+        }
+
+        /* ===== 页脚 ===== */
+        .footer {
+            background: #1a1a2e;
+            color: rgba(255, 255, 255, 0.7);
+            padding: 40px 0 28px;
+            text-align: center;
+            font-size: 0.92rem;
+        }
+
+        .footer a {
+            color: #e94560;
+        }
+
+        .footer .social {
+            margin-top: 12px;
+            display: flex;
+            justify-content: center;
+            gap: 24px;
+        }
+
+        .footer .social a {
+            color: rgba(255, 255, 255, 0.6);
+            transition: color 0.2s;
+        }
+
+        .footer .social a:hover {
+            color: #fff;
+        }
+
+        /* ===== 响应式 ===== */
+        @media (max-width: 768px) {
+            .navbar .container {
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .nav-links {
+                gap: 16px;
+                font-size: 0.85rem;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .about-grid {
+                grid-template-columns: 1fr;
+                gap: 24px;
+            }
+
+            .pub-list {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 60px 0 48px;
+            }
+
+            .hero h1 {
+                font-size: 1.7rem;
+            }
+
+            .research-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .team-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== 导航栏 ===== -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="logo">Bio<span>Mech</span> Lab</div>
+            <ul class="nav-links">
+                <li><a href="#about">关于我们</a></li>
+                <li><a href="#research">研究方向</a></li>
+                <li><a href="#team">团队成员</a></li>
+                <li><a href="#publications">研究成果</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- ===== Hero ===== -->
+    <section class="hero">
+        <div class="container">
+            <h1>生物力学 <span>研究团队</span></h1>
+            <p class="subtitle">运动表现 · 损伤预防 · 康复工程</p>
+            <p class="description">
+                我们是一支专注于生物力学与运动科学的跨学科研究团队，
+                致力于探索人体运动的力学机制，推动运动表现提升与损伤风险防控的创新发展。
+            </p>
+        </div>
+    </section>
+
+    <!-- ===== 关于我们 ===== -->
+    <section class="about" id="about">
+        <div class="container">
+            <h2 class="section-title">关于我们</h2>
+            <p class="section-subtitle">了解我们的使命与研究方向</p>
+
+            <div class="about-grid">
+                <div class="about-text">
+                    <p>
+                        <strong>生物力学研究团队</strong> 成立于 2020 年，由多位运动科学、
+                        康复医学与工程力学领域的学者共同组建。团队聚焦于人体运动中的力学问题，
+                        尤其关注 <strong>减速与制动</strong> 在运动表现和损伤预防中的关键作用[reference:2]。
+                    </p>
+                    <p>
+                        尽管加速能力和最高速度长期以来是训练与研究的核心，但减速与制动能力
+                        对于多方向运动项目中的运动员同样至关重要[reference:3]。
+                        我们的工作正是为了填补这一领域的知识空白。
+                    </p>
+                    <p>
+                        团队已与多家顶级体育组织、医疗机构及科技企业建立了合作关系，
+                        致力于将前沿研究成果转化为实际应用[reference:4]。
+                    </p>
+                </div>
+                <ul class="mission-list">
+                    <li>🎯 发展创新的生物力学评估方法</li>
+                    <li>📊 揭示减速与制动的力学机制</li>
+                    <li>⚡ 设计针对性的训练与干预方案</li>
+                    <li>🩺 降低运动损伤风险，提升运动寿命</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 研究方向 ===== -->
+    <section class="research" id="research">
+        <div class="container">
+            <h2 class="section-title">研究方向</h2>
+            <p class="section-subtitle">我们的核心研究领域</p>
+
+            <div class="research-cards">
+                <div class="research-card">
+                    <div class="icon">🏃</div>
+                    <h3>运动生物力学</h3>
+                    <p>基于动作捕捉与力学分析，研究跑步、变向、跳跃等动作的力学特征与优化策略。</p>
+                </div>
+                <div class="research-card">
+                    <div class="icon">🛡️</div>
+                    <h3>损伤预防与康复</h3>
+                    <p>探索运动损伤的力学诱因，开发基于生物力学的康复训练方案与风险评估工具[reference:5]。</p>
+                </div>
+                <div class="research-card">
+                    <div class="icon">📈</div>
+                    <h3>运动表现提升</h3>
+                    <p>通过 biomechanical 建模与数据分析，为运动员提供个性化的技术优化与训练建议。</p>
+                </div>
+                <div class="research-card">
+                    <div class="icon">🧪</div>
+                    <h3>智能传感与评估</h3>
+                    <p>研发可穿戴设备与力台系统，实现运动数据的实时采集与 biomechanical 指标量化。</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 团队成员 ===== -->
+    <section class="team" id="team">
+        <div class="container">
+            <h2 class="section-title">团队成员</h2>
+            <p class="section-subtitle">我们的核心研究力量</p>
+
+            <div class="team-grid">
+                <div class="team-card">
+                    <div class="avatar">张</div>
+                    <div class="name">张 教授</div>
+                    <div class="title">团队负责人 · 博士生导师</div>
+                    <div class="bio">运动生物力学方向，主持多项国家自然科学基金项目，发表 SCI 论文 40 余篇。</div>
+                </div>
+                <div class="team-card">
+                    <div class="avatar">李</div>
+                    <div class="name">李 副教授</div>
+                    <div class="title">运动康复与损伤预防</div>
+                    <div class="bio">专注于运动损伤的生物力学机制，擅长临床 biomechanical 评估与干预。</div>
+                </div>
+                <div class="team-card">
+                    <div class="avatar">王</div>
+                    <div class="name">王 博士</div>
+                    <div class="title">智能传感与数据分析</div>
+                    <div class="bio">研发可穿戴运动监测系统，擅长机器学习与 biomechanical 信号处理。</div>
+                </div>
+                <div class="team-card">
+                    <div class="avatar">陈</div>
+                    <div class="name">陈 博士</div>
+                    <div class="title">运动表现与训练科学</div>
+                    <div class="bio">长期服务高水平运动员，研究方向为减速能力与变向技术的优化训练。</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 研究成果 ===== -->
+    <section class="publications" id="publications">
+        <div class="container">
+            <h2 class="section-title">研究成果</h2>
+            <p class="section-subtitle">代表性论文与科研项目</p>
+
+            <div class="pub-list">
+                <div class="pub-item">
+                    <div class="pub-title">水平减速能力的神经肌肉决定因素</div>
+                    <div class="pub-meta">Sports Medicine, 2024 | 张 等</div>
+                </div>
+                <div class="pub-item">
+                    <div class="pub-title">多方向运动中的制动负荷与损伤风险</div>
+                    <div class="pub-meta">British Journal of Sports Medicine, 2023 | 李 等</div>
+                </div>
+                <div class="pub-item">
+                    <div class="pub-title">基于可穿戴设备的变向动作 biomechanical 分析</div>
+                    <div class="pub-meta">Journal of Biomechanics, 2024 | 王 等</div>
+                </div>
+                <div class="pub-item">
+                    <div class="pub-title">减速训练对运动员变向能力的影响：系统综述</div>
+                    <div class="pub-meta">Sports Medicine - Open, 2025 | 陈 等</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== 页脚 ===== -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 生物力学研究团队 · 保留所有权利</p>
+            <p style="margin-top: 6px; font-size: 0.85rem;">
+                联系方式：biomech.lab@example.edu
+            </p>
+            <div class="social">
+                <a href="#">📧 邮箱</a>
+                <a href="#">🐦 学术社交</a>
+                <a href="#">📄 Google Scholar</a>
+            </div>
+        </div>
+    </footer>
+
+</body>
+</html>
